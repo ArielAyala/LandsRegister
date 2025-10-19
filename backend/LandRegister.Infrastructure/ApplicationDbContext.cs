@@ -16,6 +16,7 @@ namespace LandRegister.Infrastructure
         }
 
         public DbSet<Property> Properties { get; set; }
+        public DbSet<User> Users { get; set; }
 
     }
 }
