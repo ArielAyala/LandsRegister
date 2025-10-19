@@ -1,3 +1,4 @@
+using LandRegister.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace LandRegister.Infrastructure
@@ -8,11 +9,13 @@ namespace LandRegister.Infrastructure
             : base(options)
         {
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             // Configure entities here
         }
+
+        public DbSet<Property> Properties { get; set; }
+
     }
 }
