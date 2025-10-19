@@ -1,11 +1,13 @@
 using LandRegister.Application.DTOs;
 using LandRegister.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LandRegister.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class PropertiesController : ControllerBase
     {
         private readonly IPropertyService _propertyService;
