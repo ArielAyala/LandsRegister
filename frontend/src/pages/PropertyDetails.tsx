@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import api from '../api';
-import type { Property } from '../types';
+import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import api from "../api";
+import type { Property } from "../types";
 
 export default function PropertyDetails() {
   const { id } = useParams();
@@ -9,7 +9,10 @@ export default function PropertyDetails() {
 
   useEffect(() => {
     if (!id) return;
-    api.get<Property>(`/properties/${id}`).then((res) => setProperty(res.data)).catch((err) => console.error(err));
+    api
+      .get<Property>(`/properties/${id}`)
+      .then((res) => setProperty(res.data))
+      .catch((err) => console.error(err));
   }, [id]);
 
   if (!property) return <div style={{ padding: 12 }}>Loading...</div>;
@@ -21,8 +24,14 @@ export default function PropertyDetails() {
       <div>Seller: {property.sellerContact}</div>
       <div>User: {property.user}</div>
       <div>Dimensions: {property.dimensions}</div>
-      <div>Is Titled: {property.isTitled ? 'Yes' : 'No'}</div>
-      {property.locationLink && <div><a href={property.locationLink} target="_blank">Location</a></div>}
+      <div>Is Titled: {property.isTitled ? "Yes" : "No"}</div>
+      {property.locationLink && (
+        <div>
+          <a href={property.locationLink} target="_blank">
+            Location
+          </a>
+        </div>
+      )}
       <div style={{ marginTop: 12 }}>
         <Link to={`/properties/${property.id}/edit`}>Edit</Link>
       </div>
