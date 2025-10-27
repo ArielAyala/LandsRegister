@@ -1,40 +1,105 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../api";
 import type { Property } from "../types";
 
+const currencyFormatter = new Intl.NumberFormat("es-ES", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 0,
+});
+
 export default function PropertyDetails() {
   const { id } = useParams();
   const [property, setProperty] = useState<Property | null>(null);
+  const [loading, setLoading] = useState(Boolean(id));
 
   useEffect(() => {
     if (!id) return;
+    setLoading(true);
     api
       .get<Property>(`/properties/${id}`)
       .then((res) => setProperty(res.data))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, [id]);
 
-  if (!property) return <div style={{ padding: 12 }}>Loading...</div>;
+  const coordinates = useMemo(() => {
+    if (!property) return "-";
+    if (property.latitude == null || property.longitude == null)
+      return "Sin coordenadas";
+    return `${property.latitude.toFixed(6)}, ${property.longitude.toFixed(6)}`;
+  }, [property]);
+
+  if (loading || !property) {
+    return (
+      <section className="surface-section">
+        <div className="card-surface">
+          <div className="skeleton skeleton--lg" />
+          <div className="skeleton skeleton--sm" />
+          <div className="skeleton" />
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <div style={{ padding: 12 }}>
-      <h2>{property.reference}</h2>
-      <div>Price: {property.price}</div>
-      <div>Seller: {property.sellerContact}</div>
-      <div>User: {property.user}</div>
-      <div>Dimensions: {property.dimensions}</div>
-      <div>Is Titled: {property.isTitled ? "Yes" : "No"}</div>
-      {property.locationLink && (
+    <section className="surface-section">
+      <header className="page-header">
         <div>
-          <a href={property.locationLink} target="_blank">
-            Location
-          </a>
+          <span className="pill">Referencia {property.reference}</span>
+          <h2 className="heading-section">Detalle de propiedad</h2>
+          <p className="text-muted">
+            Información consolidada para seguimiento y verificación.
+          </p>
         </div>
-      )}
-      <div style={{ marginTop: 12 }}>
-        <Link to={`/properties/${property.id}/edit`}>Edit</Link>
+        <Link
+          className="button-secondary"
+          to={`/properties/${property.id}/edit`}
+        >
+          Editar propiedad
+        </Link>
+      </header>
+
+      <div className="card-surface">
+        <div className="details-grid">
+          <div className="detail-tile">
+            <span>Precio estimado</span>
+            <strong>{currencyFormatter.format(property.price)}</strong>
+          </div>
+          <div className="detail-tile">
+            <span>Estado del título</span>
+            <strong>{property.isTitled ? "Titulado" : "Sin título"}</strong>
+          </div>
+          <div className="detail-tile">
+            <span>Responsable</span>
+            <strong>{property.user}</strong>
+          </div>
+          <div className="detail-tile">
+            <span>Contacto del vendedor</span>
+            <strong>{property.sellerContact}</strong>
+          </div>
+          <div className="detail-tile">
+            <span>Dimensiones</span>
+            <strong>{property.dimensions}</strong>
+          </div>
+          <div className="detail-tile">
+            <span>Coordenadas</span>
+            <strong>{coordinates}</strong>
+          </div>
+        </div>
+
+        {property.locationLink && (
+          <a
+            className="button-secondary"
+            href={property.locationLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ver ubicación en mapa
+          </a>
+        )}
       </div>
-    </div>
+    </section>
   );
 }

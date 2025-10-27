@@ -10,60 +10,76 @@ import PropertyDetails from "./pages/PropertyDetails";
 
 export default function App() {
   const location = useLocation();
-  const showNavbar = location.pathname !== "/login";
+  const isAuthRoute = ["/login", "/register"].includes(location.pathname);
 
   return (
-    <div>
-      {showNavbar && <Navbar />}
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <div style={{ padding: 12 }}>
-                <h1>Welcome to Land Register</h1>
-                <p>
-                  <Link to="/properties">View properties</Link>
-                </p>
-              </div>
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/properties"
-          element={
-            <ProtectedRoute>
-              <PropertiesList />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/properties/new"
-          element={
-            <ProtectedRoute>
-              <PropertyForm />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/properties/:id"
-          element={
-            <ProtectedRoute>
-              <PropertyDetails />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/properties/:id/edit"
-          element={
-            <ProtectedRoute>
-              <PropertyForm />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+    <div className="app-shell">
+      {!isAuthRoute && <Navbar />}
+      <main className="app-content">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <section className="hero-card">
+                  <span className="pill">Land Registry Hub</span>
+                  <div className="hero-card__content">
+                    <h1 className="heading-primary">
+                      Bienvenido a tu panel de propiedades
+                    </h1>
+                    <p className="text-muted">
+                      Gestiona lotes, vendedores y documentación desde una
+                      interfaz moderna diseñada para tu flujo de trabajo diario.
+                    </p>
+                    <div className="hero-actions">
+                      <Link className="button-primary" to="/properties">
+                        Ver listado
+                      </Link>
+                      <Link className="button-secondary" to="/properties/new">
+                        Registrar propiedad
+                      </Link>
+                    </div>
+                  </div>
+                </section>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/properties"
+            element={
+              <ProtectedRoute>
+                <PropertiesList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/properties/new"
+            element={
+              <ProtectedRoute>
+                <PropertyForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/properties/:id"
+            element={
+              <ProtectedRoute>
+                <PropertyDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/properties/:id/edit"
+            element={
+              <ProtectedRoute>
+                <PropertyForm />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </main>
     </div>
   );
 }
