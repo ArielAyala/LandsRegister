@@ -10,6 +10,5 @@ namespace LandRegister.Application.DTOs
         public double? Longitude { get; set; }
         public string Dimensions { get; set; } = string.Empty;
         public bool IsTitled { get; set; }
-        public string User { get; set; } = string.Empty;
     }
 }

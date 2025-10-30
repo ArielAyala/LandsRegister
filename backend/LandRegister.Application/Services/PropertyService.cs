@@ -27,7 +27,8 @@ namespace LandRegister.Application.Services
             return properties.Select(MapToDto);
         }
 
-        public async Task<PropertyDto> CreateAsync(CreatePropertyDto dto)
+        // Accept userId extracted from the authenticated request
+        public async Task<PropertyDto> CreateAsync(CreatePropertyDto dto, Guid userId)
         {
             var property = new Property
             {
@@ -41,7 +42,7 @@ namespace LandRegister.Application.Services
                 Dimensions = dto.Dimensions,
                 IsTitled = dto.IsTitled,
                 RegistrationDate = DateTime.UtcNow,
-                User = dto.User
+                UserId = userId
             };
 
             await _propertyRepository.AddAsync(property);
@@ -91,7 +92,8 @@ namespace LandRegister.Application.Services
                 Dimensions = property.Dimensions,
                 IsTitled = property.IsTitled,
                 RegistrationDate = property.RegistrationDate,
-                User = property.User
+                UserId = property.UserId,
+                User = property.User != null ? property.User.Username : string.Empty
             };
         }
     }

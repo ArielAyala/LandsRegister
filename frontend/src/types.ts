@@ -9,7 +9,8 @@ export interface Property {
   dimensions: string;
   isTitled: boolean;
   registrationDate: string;
-  user: string;
+  userId: string;
+  user?: string; // username or display name
 }
 
 export interface CreateProperty {
@@ -21,7 +22,6 @@ export interface CreateProperty {
   longitude?: number;
   dimensions: string;
   isTitled: boolean;
-  user: string;
 }
 
 export interface LoginDto {

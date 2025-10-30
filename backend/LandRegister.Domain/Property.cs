@@ -12,6 +12,7 @@ namespace LandRegister.Domain
         public string Dimensions { get; set; } = string.Empty;
         public bool IsTitled { get; set; }
         public DateTime RegistrationDate { get; set; }
-        public string User { get; set; } = string.Empty;
+        public Guid UserId { get; set; }
+        public User? User { get; set; }
     }
 }

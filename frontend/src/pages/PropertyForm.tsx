@@ -25,7 +25,6 @@ export default function PropertyForm() {
     longitude: undefined,
     dimensions: "",
     isTitled: false,
-    user: "",
   });
   const [formError, setFormError] = useState<string | null>(null);
   const [loadingProperty, setLoadingProperty] = useState(Boolean(id));
@@ -47,7 +46,6 @@ export default function PropertyForm() {
           longitude: p.longitude ?? undefined,
           dimensions: p.dimensions,
           isTitled: p.isTitled,
-          user: p.user,
         });
       })
       .catch((err) => setFormError(getErrorMessage(err)))
@@ -149,16 +147,7 @@ export default function PropertyForm() {
           />
         </div>
 
-        <div className="input-field">
-          <label htmlFor="property-user">Usuario responsable</label>
-          <input
-            id="property-user"
-            placeholder="Usuario asignado"
-            value={model.user}
-            onChange={(e) => updateModel("user", e.target.value)}
-            required
-          />
-        </div>
+        {/* Owner is assigned by the server from the authenticated user. No input required. */}
 
         <div className="input-field">
           <label htmlFor="property-location">

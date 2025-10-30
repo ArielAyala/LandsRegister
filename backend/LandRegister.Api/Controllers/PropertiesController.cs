@@ -37,7 +37,16 @@ namespace LandRegister.Api.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var property = await _propertyService.CreateAsync(dto);
+            // Extract user id from JWT claims (sub or nameidentifier)
+            var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value
+                              ?? User.FindFirst("sub")?.Value;
+
+            if (!Guid.TryParse(userIdClaim, out var userId))
+            {
+                return Unauthorized();
+            }
+
+            var property = await _propertyService.CreateAsync(dto, userId);
             return CreatedAtAction(nameof(GetById), new { id = property.Id }, property);
         }
 

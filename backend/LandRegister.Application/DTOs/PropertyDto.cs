@@ -12,6 +12,7 @@ namespace LandRegister.Application.DTOs
         public string Dimensions { get; set; } = string.Empty;
         public bool IsTitled { get; set; }
         public DateTime RegistrationDate { get; set; }
+        public Guid UserId { get; set; }
         public string User { get; set; } = string.Empty;
     }
 }

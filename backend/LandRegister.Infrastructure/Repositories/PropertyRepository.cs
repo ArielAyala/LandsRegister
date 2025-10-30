@@ -14,17 +14,21 @@ namespace LandRegister.Infrastructure.Repositories
 
         public async Task<Property?> GetByIdAsync(Guid id)
         {
-            return await _context.Properties.FindAsync(id);
+            return await _context.Properties
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<IEnumerable<Property>> GetAllAsync()
         {
-            return await _context.Properties.ToListAsync();
+            return await _context.Properties
+                .Include(p => p.User)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Property>> GetFilteredAsync(System.Linq.Expressions.Expression<Func<Property, bool>> predicate)
         {
-            return await _context.Properties.Where(predicate).ToListAsync();
+            return await _context.Properties.Where(predicate).Include(p => p.User).ToListAsync();
         }
 
         public async Task AddAsync(Property property)
