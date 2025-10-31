@@ -111,7 +111,7 @@ namespace LandRegister.Application.Services
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Username),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+                new Claim("userId", user.Id.ToString())
             };
 
             var token = new JwtSecurityToken(

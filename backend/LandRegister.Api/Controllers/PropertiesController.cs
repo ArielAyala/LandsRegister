@@ -37,9 +37,8 @@ namespace LandRegister.Api.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            // Extract user id from JWT claims (sub or nameidentifier)
-            var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value
-                              ?? User.FindFirst("sub")?.Value;
+            // Extract user id from JWT claims
+            var userIdClaim = User.FindFirst("userId")?.Value;
 
             if (!Guid.TryParse(userIdClaim, out var userId))
             {
