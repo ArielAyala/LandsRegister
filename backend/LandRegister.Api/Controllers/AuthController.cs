@@ -45,6 +45,10 @@ namespace LandRegister.Api.Controllers
             {
                 return Unauthorized(new { message = ex.Message });
             }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Login failed", detail = ex.Message });
+            }
         }
 
         [HttpGet("{id}")]
