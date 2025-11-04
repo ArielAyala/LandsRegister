@@ -50,3 +50,9 @@ To create and apply EF Core migrations:
 
 - Health check: `GET /api/health`
 - Test endpoints: `GET /api/test`, `POST /api/test`
+- Properties:
+  - `GET /api/properties` - Get all properties
+  - `GET /api/properties/{id}` - Get property by ID
+  - `POST /api/properties` - Create new property
+  - `PUT /api/properties/{id}` - Update property
+  - `DELETE /api/properties/{id}` - Delete property
