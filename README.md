@@ -17,7 +17,21 @@ Full-stack solution for managing land properties and users. The project delivers
 
 ## Quick start
 
-1. Configure environment secrets (connection string, JWT keys) inside `backend/LandRegister.Api/appsettings.Development.json`.
+1. Configure environment secrets:
+   - Set the database connection string in `backend/LandRegister.Api/appsettings.Development.json`.
+   - Ensure JWT configuration (Key, Issuer, Audience) is properly set in `backend/LandRegister.Api/appsettings.json` (or override via environment variables for production).
+   
+   Example JWT configuration in `appsettings.json`:
+   ```json
+   {
+     "Jwt": {
+       "Key": "your-super-secure-secret",
+       "Issuer": "LandRegister.Api",
+       "Audience": "LandRegister.Api"
+     }
+   }
+   ```
+   For production, use a strong, randomly generated key and consider environment variables like `ASPNETCORE_Jwt__Key`.
 2. From the `backend` directory, run:
    ```powershell
    dotnet restore
