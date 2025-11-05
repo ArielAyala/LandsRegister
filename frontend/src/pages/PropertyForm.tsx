@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "../api";
-import type { CreateProperty, Property } from "../types";
+import { getProperty, createProperty, updateProperty } from "../services/propertyService";
+import type { CreateProperty } from "../types";
 
 function getErrorMessage(error: unknown) {
   if (typeof error === "object" && error && "response" in error) {
@@ -33,10 +33,8 @@ export default function PropertyForm() {
   useEffect(() => {
     if (!id) return;
     setLoadingProperty(true);
-    api
-      .get<Property>(`/properties/${id}`)
-      .then((res) => {
-        const p = res.data;
+    getProperty(id)
+      .then((p) => {
         setModel({
           reference: p.reference,
           sellerContact: p.sellerContact,
@@ -58,9 +56,9 @@ export default function PropertyForm() {
     setFormError(null);
     try {
       if (isEdit && id) {
-        await api.put(`/properties/${id}`, model);
+        await updateProperty(id, model);
       } else {
-        await api.post("/properties", model);
+        await createProperty(model);
       }
       navigate("/properties");
     } catch (err) {

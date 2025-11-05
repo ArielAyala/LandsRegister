@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../auth";
+import { login } from "../services/authService";
 
 function getErrorMessage(error: unknown) {
   if (typeof error === "object" && error && "response" in error) {

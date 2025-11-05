@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import api from "../api";
+import { getProperty } from "../services/propertyService";
 import type { Property } from "../types";
 
 const currencyFormatter = new Intl.NumberFormat("es-ES", {
@@ -17,9 +17,8 @@ export default function PropertyDetails() {
   useEffect(() => {
     if (!id) return;
     setLoading(true);
-    api
-      .get<Property>(`/properties/${id}`)
-      .then((res) => setProperty(res.data))
+    getProperty(id)
+      .then((data) => setProperty(data))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [id]);

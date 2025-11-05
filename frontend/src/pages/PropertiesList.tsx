@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import api from "../api";
+import { getProperties, deleteProperty } from "../services/propertyService";
 import type { Property } from "../types";
 
 const currencyFormatter = new Intl.NumberFormat("es-ES", {
@@ -14,9 +14,8 @@ export default function PropertiesList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api
-      .get<Property[]>("/properties")
-      .then((res) => setProperties(res.data))
+    getProperties()
+      .then((res) => setProperties(res))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, []);
@@ -24,7 +23,7 @@ export default function PropertiesList() {
   async function onDelete(id: string) {
     if (!confirm("¿Eliminar esta propiedad?")) return;
     try {
-      await api.delete(`/properties/${id}`);
+      await deleteProperty(id);
       setProperties((p) => p.filter((x) => x.id !== id));
     } catch (err) {
       console.error(err);
