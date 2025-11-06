@@ -11,7 +11,7 @@ api.interceptors.request.use((config) => {
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-  const apiKey = import.meta.env.AWS_API_GATEWAY_KEY;
+  const apiKey = import.meta.env.VITE_AWS_API_GATEWAY_KEY;
   if (apiKey && config.headers) {
     config.headers['x-api-key'] = apiKey;
   }
