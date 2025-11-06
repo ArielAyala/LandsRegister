@@ -1,5 +1,5 @@
-using LandRegister.Domain;
 using LandRegister.Domain.Entities;
+using LandRegister.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LandRegister.Infrastructure.Repositories

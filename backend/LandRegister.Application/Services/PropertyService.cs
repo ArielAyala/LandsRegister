@@ -1,7 +1,7 @@
 using LandRegister.Application.DTOs;
 using LandRegister.Application.Interfaces;
-using LandRegister.Domain;
 using LandRegister.Domain.Entities;
+using LandRegister.Domain.Interfaces;
 
 namespace LandRegister.Application.Services
 {

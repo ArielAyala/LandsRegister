@@ -1,4 +1,4 @@
-using LandRegister.Domain;
+using LandRegister.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace LandRegister.Infrastructure

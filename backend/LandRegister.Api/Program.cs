@@ -1,6 +1,6 @@
 using LandRegister.Application.Interfaces;
 using LandRegister.Application.Services;
-using LandRegister.Domain;
+using LandRegister.Domain.Interfaces;
 using LandRegister.Infrastructure;
 using LandRegister.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

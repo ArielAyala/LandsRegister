@@ -1,7 +1,7 @@
 using LandRegister.Domain;
 using LandRegister.Domain.Entities;
 
-namespace LandRegister.Domain
+namespace LandRegister.Domain.Interfaces
 {
     public interface IUserRepository
     {

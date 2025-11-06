@@ -1,4 +1,4 @@
-namespace LandRegister.Domain
+namespace LandRegister.Domain.Interfaces
 {
     public interface IUnitOfWork
     {
