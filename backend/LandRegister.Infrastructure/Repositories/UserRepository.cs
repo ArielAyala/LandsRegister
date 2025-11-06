@@ -1,4 +1,5 @@
 using LandRegister.Domain;
+using LandRegister.Domain.Entities;
 using LandRegister.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 

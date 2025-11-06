@@ -1,4 +1,6 @@
 using System.Linq.Expressions;
+using LandRegister.Domain;
+using LandRegister.Domain.Entities;
 
 namespace LandRegister.Domain
 {

@@ -1,6 +1,7 @@
 using LandRegister.Application.DTOs;
 using LandRegister.Application.Interfaces;
 using LandRegister.Domain;
+using LandRegister.Domain.Entities;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
