@@ -3,7 +3,7 @@ import { Routes, Route, Link, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
-import Register from "./pages/Register";
+// import Register from "./pages/Register";
 import PropertiesList from "./pages/PropertiesList";
 import PropertyForm from "./pages/PropertyForm";
 import PropertyDetails from "./pages/PropertyDetails";
@@ -18,7 +18,7 @@ export default function App() {
       <main className="app-content">
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          {/* <Route path="/register" element={<Register />} /> */}
           <Route
             path="/"
             element={
