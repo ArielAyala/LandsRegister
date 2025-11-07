@@ -27,7 +27,7 @@ namespace LandRegister.Tests.Application
             var property = new Property
             {
                 Id = propertyId,
-                Reference = "REF123",
+                Reference = "REF1234",
                 SellerContact = "John Doe",
                 Price = 100000m,
                 Dimensions = "100x50",
