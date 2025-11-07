@@ -3,7 +3,6 @@ using LandRegister.Application.Services;
 using LandRegister.Domain.Entities;
 using LandRegister.Domain.Interfaces;
 using Moq;
-using Xunit;
 
 namespace LandRegister.Tests.Application
 {
