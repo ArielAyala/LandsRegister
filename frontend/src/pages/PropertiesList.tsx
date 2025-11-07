@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProperties, deleteProperty } from "../services/propertyService";
 import type { Property } from "../types";
+import { Edit, Trash2 } from "lucide-react";
 
 const currencyFormatter = new Intl.NumberFormat("es-ES", {
   style: "currency",
@@ -86,11 +87,16 @@ export default function PropertiesList() {
                       <Link
                         className="nav-link"
                         to={`/properties/${prop.id}/edit`}
+                        title="Editar"
                       >
-                        Editar
+                        <Edit size={16} className="icon-action" />
                       </Link>
-                      <button onClick={() => onDelete(prop.id)} type="button">
-                        Eliminar
+                      <button
+                        onClick={() => onDelete(prop.id)}
+                        type="button"
+                        title="Eliminar"
+                      >
+                        <Trash2 size={16} className="icon-action" />
                       </button>
                     </div>
                   </td>
