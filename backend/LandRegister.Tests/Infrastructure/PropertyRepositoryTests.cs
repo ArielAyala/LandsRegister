@@ -2,7 +2,7 @@ using LandRegister.Domain.Entities;
 using LandRegister.Infrastructure;
 using LandRegister.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Xunit;
+
 
 namespace LandRegister.Tests.Infrastructure
 {
