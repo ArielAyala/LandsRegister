@@ -30,7 +30,7 @@ namespace LandRegister.Tests.Application
                 Reference = "REF1234",
                 SellerContact = "John Doe",
                 Price = 100000m,
-                Dimensions = "100x50",
+                Dimensions = "100x40",
                 IsTitled = true,
                 RegistrationDate = DateTime.UtcNow,
                 UserId = Guid.NewGuid()
